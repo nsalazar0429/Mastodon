@@ -12,7 +12,7 @@ describe('Form Component', () => {
   beforeEach(() => {
     // Mock the createMastodonClient function to return a mock client
     (createMastodonClient).mockReturnValue({
-      post: jest.fn(() => Promise.resolve()), // Mock the post method
+      post: jest.fn(() => Promise.resolve()), // Mock the post method 
     });
     render(<Form onSubmit={mockOnSubmit} onClose={mockOnClose} />);
   });
