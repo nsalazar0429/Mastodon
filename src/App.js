@@ -1,23 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
+import Header from './Header';
+import Form from './Form';
+import Modal from './Modal';
 
 function App() {
+  const [showForm, setShowForm] = useState(false);
+  const [posts, setPosts] = useState(); // State to store posts
+
+  const handleCreateNew = () => {
+    setShowForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
+
+  const handleCreatePost = (newPostContent) => {
+    setShowForm(false);
+  };
+
   return (
-    <div className="text-center">
-      <header className="bg-gray-800 text-white flex flex-col items-center justify-center min-h-screen text-3xl">
-        <img src={logo} className="pointer-events-none h-40 animate-spin" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="text-blue-400"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div  className="bg-gray-900 text-white min-h-screen">
+      <Header onCreateNew={handleCreateNew} />
+      {showForm && (
+        <Modal isOpen={showForm} onClose={handleCloseForm}>
+          <Form onClose={handleCloseForm} onSubmit={handleCreatePost} />
+        </Modal>
+      )}
     </div>
   );
 }
