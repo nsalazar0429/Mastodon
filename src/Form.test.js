@@ -48,19 +48,4 @@ describe('Form Component', () => {
 
     alertMock.mockRestore();
   });
-
-  // it('shows the loading spinner while posting', async () => {
-  //   const mockPost = (createMastodonClient as jest.Mock).mock.results.value.post; // Access the mock post method
-  //   mockPost.mockImplementation(() => new Promise((resolve) => setTimeout(resolve, 1000)));
-
-  //   const textarea = screen.getByRole('textbox');
-  //   const submitButton = screen.getByRole('button', { name: /create post/i });
-
-  //   fireEvent.change(textarea, { target: { value: 'Test post content' } });
-  //   fireEvent.click(submitButton);
-
-  //   expect(screen.getByRole('progressbar')).toBeInTheDocument();
-
-  //   await mockPost;
-  // });
 });
