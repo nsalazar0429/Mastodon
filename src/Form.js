@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import Loading from './Loading';
-import createMastodonClient from './MastodonClient';
+import { postStatus } from './MastodonClient';
 
 function Form({ onClose, onSubmit }) {
     const [isPosting, setIsPosting] = useState(false);
@@ -16,22 +16,20 @@ function Form({ onClose, onSubmit }) {
         
         setIsPosting(true)
         try {
-            const MastodonClient = createMastodonClient();
-            await MastodonClient.post('statuses', { status: newPost });
-            console.log('Posted to mastodon successfully');
-            onSubmit(newPost); 
-          } catch (error) {
-            console.error('Error posting to Mastodon:', error);
-            alert('Error posting to Mastodon.'); 
-            // Handle the error (e.g., show an error message to the user)
-          } finally {
-            setIsPosting(false); 
-          }
+            const success = postStatus(newPost)
+            if (success){
+                onSubmit(newPost)
+            } else {
+                alert('Error posting to Mastodon.');
+            }
+        } finally{
+            setIsPosting(false);
+        }
     };
 
     return (
         <form
-            className="bg-gray-800  rounded w-96 space-y-4"
+            className="bg-gray-700  rounded w-96 space-y-4"
             onSubmit={handleSubmit}
         >
             <h2 className="text-xl text-gray-100 font-bold mb-4">Create New Post</h2>
