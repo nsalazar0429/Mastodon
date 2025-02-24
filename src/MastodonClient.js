@@ -47,3 +47,15 @@ export const fetchStatuses = async () => {
         return;
     }
 }
+
+export const deleteStatus = async (id) => {
+    const mastodonClient = getMastondonClient();
+    try {
+      await mastodonClient.delete(`statuses/${id}`);
+      console.log(`Deleted status ${id} successfully`);
+      return true; // Indicate success
+    } catch (error) {
+      console.error(`Error deleting status ${id}:`, error);
+      return false; // Indicate failure
+    }
+  };

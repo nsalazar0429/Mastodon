@@ -2,7 +2,7 @@ import React from 'react';
 
 function Loading() {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center p-4 items-center w-full" name="progressBar">
       <svg
         className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
         xmlns="http://www.w3.org/2000/svg"

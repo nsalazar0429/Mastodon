@@ -3,21 +3,25 @@ import Header from './Header';
 import Form from './Form';
 import Modal from './Modal';
 import StatusList from './StatusList';
+import Loading from './Loading';
 import { fetchStatuses } from './MastodonClient';
+import { deleteStatus } from './MastodonClient';
 
 function App() {
   const [showForm, setShowForm] = useState(false);
-  const [posts, setPosts] = useState(); // State to store posts
+  const [posts, setPosts] = useState([]); // State to store posts
   const [refreshTrigger, setRefreshTrigger] = useState(0);
-  
+  const [isPosting, setIsPosting] = useState(false);
+
   const fetchPosts = useCallback(async () => {
     const fetchedStatuses = await fetchStatuses();
+    setIsPosting(false)
     setPosts(fetchedStatuses);
   }, []);
 
   useEffect(() => {
     fetchPosts();
-  },[refreshTrigger, fetchPosts]);
+  }, [refreshTrigger, fetchPosts]);
 
   const handleCreateNew = () => {
     setShowForm(true);
@@ -28,20 +32,33 @@ function App() {
   };
 
   const handleCreatePost = (newPostContent) => {
-    setPosts([newPostContent,...posts]); 
     setShowForm(false);
+    setIsPosting(true)
     setRefreshTrigger(refreshTrigger + 1);
   };
 
+  const handlePostDelete = async (postId) => {
+    console.log(`ID:${postId}`)
+    setIsPosting(true)
+    const success = await deleteStatus(postId);
+    if (success) {
+      setRefreshTrigger(refreshTrigger + 1);
+    } else {
+      setIsPosting(false)
+      console.error('Error deleting post:', postId);
+    }
+  };
+
   return (
-    <div  className="bg-gray-900 text-white min-h-screen">
+    <div className="bg-gray-900 text-white min-h-screen">
       <Header onCreateNew={handleCreateNew} />
+      {isPosting && <Loading/>}
       {showForm && (
         <Modal isOpen={showForm} onClose={handleCloseForm}>
           <Form onClose={handleCloseForm} onSubmit={handleCreatePost} />
         </Modal>
       )}
-      <StatusList posts={posts}/>
+      {!isPosting && <StatusList posts={posts} onPostDelete={handlePostDelete} />}
     </div>
   );
 }

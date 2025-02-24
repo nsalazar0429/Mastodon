@@ -8,6 +8,8 @@ const Modal = ({ isOpen, onClose, children }) => {
       <div className="bg-gray-700 rounded-lg shadow-lg p-8 max-w-md w-full relative transition-all duration-300 ease-in-out">
         <button
           className="absolute top-4 right-4 text-gray-100 hover:text-gray-900 focus:outline-none"
+          name="Close Button"
+          id="Close Button"
           onClick={onClose}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

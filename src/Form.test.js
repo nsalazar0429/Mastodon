@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Form from './Form';
-import createMastodonClient from './MastodonClient';
+import {postStatus} from './MastodonClient';
 import { act } from 'react'; 
 
 jest.mock('./MastodonClient');
@@ -10,10 +10,7 @@ describe('Form Component', () => {
   const mockOnClose = jest.fn();
 
   beforeEach(() => {
-    // Mock the createMastodonClient function to return a mock client
-    (createMastodonClient).mockReturnValue({
-      post: jest.fn(() => Promise.resolve()), // Mock the post method 
-    });
+    postStatus.mockReturnValue(true);
     render(<Form onSubmit={mockOnSubmit} onClose={mockOnClose} />);
   });
 
