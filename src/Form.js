@@ -2,6 +2,11 @@ import {useState} from 'react';
 import Loading from './Loading';
 import { postStatus } from './MastodonClient';
 
+/**
+ * Component used to create new posts 
+ * 
+ * Written by Napoleon Salazar Marques (017493606)
+ */
 function Form({ onClose, onSubmit }) {
     const [isPosting, setIsPosting] = useState(false);
     

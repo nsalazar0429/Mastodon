@@ -2,6 +2,11 @@ import Mastodon from 'mastodon-api';
 
 let mastodonClient = null;
 
+/**
+ * Mastodon client set up 
+ * 
+ * Written by Napoleon Salazar Marques (017493606)
+ */
 export const getMastondonClient = () => {
     if(!mastodonClient){
         mastodonClient = new Mastodon({
@@ -12,6 +17,11 @@ export const getMastondonClient = () => {
     return mastodonClient
 }
 
+/**
+ * API call to post new status
+ * 
+ * Written by Napoleon Salazar Marques (017493606)
+ */
 export const postStatus  = async (status) => {
     const mastodonClient = getMastondonClient();
     try {
@@ -24,6 +34,11 @@ export const postStatus  = async (status) => {
     }
 }
 
+/**
+ * API call to fetch statuses
+ * 
+ * Written by Gerardo Valdez Lozano (017558281) & Joel Zapana (014379560)
+ */
 export const fetchStatuses = async () => {
     const mastodonClient = getMastondonClient();
     try {
@@ -48,6 +63,11 @@ export const fetchStatuses = async () => {
     }
 }
 
+/**
+ * API call to delete statuses
+ * 
+ * Written by Viswa Surya Kumar Suvvada (018316532)
+ */
 export const deleteStatus = async (id) => {
     const mastodonClient = getMastondonClient();
     try {

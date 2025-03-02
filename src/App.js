@@ -7,6 +7,12 @@ import Loading from './Loading';
 import { fetchStatuses } from './MastodonClient';
 import { deleteStatus } from './MastodonClient';
 
+/**
+ * App Component used to display and deele posts
+ * 
+ * Read: Written by Gerardo Valdez Lozano (017558281) & Joel Zapana (014379560)
+ * Delete: Written by Viswa Surya Kumar Suvvada (018316532)
+ */
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [posts, setPosts] = useState([]); // State to store posts
